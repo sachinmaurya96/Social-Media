@@ -1,0 +1,28 @@
+.LogoSearch{
+    display: flex;
+    gap: 0.75rem;
+}
+.Search{
+    display: flex;
+    background: var(--inputColor);
+    border-radius: 10px;
+    padding: 5px;
+    
+}
+.Search input{
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.s__icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f99827;
+    border-radius: 5px;
+    padding: 4px 8px;
+    color: white;
+}
+.s__icon:hover{
+    cursor: pointer;
+}
