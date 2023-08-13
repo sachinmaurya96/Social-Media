@@ -2,8 +2,9 @@ import React from 'react'
 import "./ProfileCard.css"
 import Cover from "../../../../img/cover.jpg"
 import Profile from "../../../../img/profileImg.jpg"
-function ProfileCard() {
-  let profilePage = true
+import { Link } from 'react-router-dom'
+function ProfileCard({profilePage}) {
+  
   return (
     <div className='ProfileCard'>
       <div className="profileImages">
@@ -42,7 +43,7 @@ function ProfileCard() {
       </div>
       {
         !profilePage && <span>
-        My Profile
+        <Link to="/profile" className='link'>My Profile</Link>
       </span>
       }
     </div>

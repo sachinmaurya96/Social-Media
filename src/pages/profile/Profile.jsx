@@ -5,11 +5,12 @@ import ProfileCard from '../../features/profile/components/profilecard/ProfileCa
 import Post from '../../features/post/components/Post'
 import RightSide from '../../features/rightSide/components/RightSide'
 function Profile() {
+  let profilePage = true
   return (
     <div className="userProfile">
         <ProfileLeft/>
         <div className="profile-center">
-            <ProfileCard/>
+            <ProfileCard  profilePage={profilePage}/>
             <Post/>
         </div>
         <RightSide/>

@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./InfoCard.css"
 import { BsPencil } from "react-icons/bs";
+import ProfileForm from '../../../../features/profile/components/profileForm/ProfileForm';
 function InfoCard() {
+  const [open , setOpen] = useState(false)
   return (
     <div className='infoCard'>
       <div className="infoHead">
         <h4>Your Info</h4>
         <div>
-
-        <BsPencil style={{fontSize:"15px"}}/>
+        <BsPencil style={{fontSize:"15px"}} onClick={()=>setOpen(!open)}/>
+          {open && <ProfileForm setOpen={setOpen} open={open}/>}
         </div>
       </div>
       <div className="info">

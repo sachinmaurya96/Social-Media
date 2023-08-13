@@ -1,0 +1,32 @@
+.profileForm{
+    position: absolute;
+    left: calc(50% - 300px);
+    z-index: 2;
+    background: #fff;
+    width: 600px;
+    border-radius: 10px;
+    padding: 1rem;
+}
+.crossIcon{
+    align-self: flex-end;
+}
+.profileForm>form>div{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.profileForm>form{
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6rem;
+}
+.p-button{
+    width: 6rem;
+    height: 2rem;
+    align-self: flex-end;
+}
+.postForm{
+    position: absolute;
+    top: 5%;
+}

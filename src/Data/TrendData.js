@@ -28,20 +28,5 @@ export const TrendData = [
         shares:100
     },
 
-    {
-        name:"Windows",
-        shares:97
-    },
-    {
-        name:"Linux",
-        shares:80
-    },
-    {
-        name:"Google",
-        shares:800
-    },
-    {
-        name:"chrome",
-        shares:1000
-    },
+   
 ]
