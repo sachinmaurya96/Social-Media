@@ -10,13 +10,13 @@
     height: 3rem;
     width: 3rem;
 }
-.postShare>div{
+.postShare>form{
     display: flex;
     flex-direction: column;
     width: 90%;
     gap: 1rem;
 }
-.postShare>div>input{
+.postShare>form>input{
     background-color: var(--inputColor);
     border-radius: 10px;
     padding: 10px;
