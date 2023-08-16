@@ -7,7 +7,7 @@ import notlike from "../../../../img/notlike.png"
 function Feed({data}) {
   return (
     <div className='feed'>
-      <img src={data.img} alt={data.name} />
+      <img src={data.Image ? "http://localhost:8080/images/"+data.Image:""} alt={data.name} />
       <div className="feedReact">
         <img src={data.liked? like : notlike} alt="notlike" />
         <img src={comment} alt="comments" />

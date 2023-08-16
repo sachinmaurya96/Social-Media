@@ -23,3 +23,11 @@ export function createPost(postData) {
         resolve({ data });
       });
     }
+
+    export function getTimeLineData(userId) {
+      return new Promise(async (resolve) => {
+        const response = await fetch(url+`/post/${userId}/timeline`);
+        const data = await response.json();
+        resolve({ data });
+      });
+    }

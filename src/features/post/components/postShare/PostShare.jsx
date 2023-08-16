@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux";
 import { selectLoggedInUser } from "../../../auth/authSlice";
 import { useDispatch } from "react-redux";
-import { createPostAsync, selectPostLoading, uploadImgAsync } from "../../postSlice";
+import { createPostAsync, getTimeLinePostAsync, selectPostLoading, uploadImgAsync } from "../../postSlice";
 function PostShare() {
   
    
@@ -76,6 +76,7 @@ function PostShare() {
                 }
             }
             dispatch(createPostAsync(newPost))
+         
           
            setImage(null)
            reset()

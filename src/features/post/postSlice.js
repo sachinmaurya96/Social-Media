@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createPost, uploadImage } from "./postApi";
+import { createPost, getTimeLineData, uploadImage } from "./postApi";
 
 const initialState = {
-    posts:[]
+    posts:[],
+    loading:false
 };
 
 export const createPostAsync = createAsyncThunk(
@@ -15,9 +16,18 @@ export const createPostAsync = createAsyncThunk(
 );
 
 export const uploadImgAsync = createAsyncThunk(
-    "post/ uploadImg",
+    "post/uploadImg",
     async (imgData) => {
       const response = await uploadImage(imgData);
+      // The value we return becomes the `fulfilled` action payload
+      return response.data;
+    }
+  );
+
+  export const getTimeLinePostAsync = createAsyncThunk(
+    "post/getTimeLinePost",
+    async (userId) => {
+      const response = await getTimeLineData(userId);
       // The value we return becomes the `fulfilled` action payload
       return response.data;
     }
@@ -37,7 +47,6 @@ export const postSlice = createSlice({
       })
       .addCase(createPostAsync.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        state.posts.push(action.payload)
         state.loading=false
       })
       .addCase(uploadImgAsync.pending, (state) => {
@@ -49,9 +58,20 @@ export const postSlice = createSlice({
         console.log(action.payload)
         state.loading=false
       })
+      .addCase(getTimeLinePostAsync.pending, (state) => {
+        state.status = "loading";
+       
+      })
+      .addCase(getTimeLinePostAsync.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.posts = action.payload
+       
+        console.log(state.posts)
+      })
   },
 });
 
 export const selectPostLoading = (state)=>state.post.loading
+export const selectTimeLinePost = (state)=>state.post.posts
 
 export default postSlice.reducer;

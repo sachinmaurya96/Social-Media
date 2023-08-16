@@ -11,7 +11,17 @@ import { Provider } from "react-alert";
 import { Signup } from "./features/auth/components/Signup";
 import { Login } from "./features/auth/components/Login";
 import ProtectedRoute from "./features/auth/components/ProtectedRoute";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchLoggedInuserAsync, selectLoggedInUser } from "./features/auth/authSlice";
+import { useSelector } from "react-redux";
 function App() {
+  const dispatch = useDispatch()
+  const user = useSelector(selectLoggedInUser)
+  console.log("app",user)
+  useEffect(()=>{
+    dispatch(fetchLoggedInuserAsync())
+  })
   const router = createBrowserRouter([
    {
     path: '/',

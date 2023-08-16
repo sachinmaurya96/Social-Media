@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUser, createUser } from "./authApi";
+import { loginUser, createUser, fetchLoggedInUser } from "./authApi";
 
 const initialState = {
   status: "idle",
@@ -20,6 +20,15 @@ export const LoginUserAsync = createAsyncThunk(
   "user/loginkUser",
   async (userData) => {
     const response = await loginUser(userData);
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+
+export const fetchLoggedInuserAsync = createAsyncThunk(
+  "user/fetchloggedInUser",
+  async (userData) => {
+    const response = await fetchLoggedInUser();
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -46,10 +55,18 @@ export const authSlice = createSlice({
         state.loading=true
       })
       .addCase(LoginUserAsync.fulfilled, (state, action) => {
-        console.log("action",action.payload)
         state.status = "fulfilled";
         state.loggedInUser = action.payload;
         localStorage.setItem("profile",JSON.stringify(action.payload))
+        state.loading=false
+      })
+      .addCase(fetchLoggedInuserAsync.pending, (state) => {
+        state.status = "loading";
+        state.loading=true
+      })
+      .addCase(fetchLoggedInuserAsync.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.loggedInUser = action.payload;
         state.loading=false
       });
   },
