@@ -1,30 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./ProfileCard.css"
 import Cover from "../../../../img/cover.jpg"
-import Profile from "../../../../img/profileImg.jpg"
+import profile from "../../../../img/user.png"
 import { Link } from 'react-router-dom'
+import { useDispatch ,useSelector} from 'react-redux'
+import { getPostByIdAsync, selectPostByID } from '../../../post/postSlice'
+
 function ProfileCard({profilePage}) {
-  
+  const dispatch = useDispatch()
+  const post = useSelector(selectPostByID)
+  const {user} = JSON.parse(localStorage.getItem("profile"))
+ useEffect(()=>{
+  dispatch(getPostByIdAsync(user.id))
+ },[])
   return (
     <div className='ProfileCard'>
       <div className="profileImages">
-        <img src={Cover} alt="cover" />
-        <img src={Profile} alt="cover" />
+        <img src={user.coverPicture ? "http://localhost:8080/images" + user.coverPicture : Cover} alt="cover" />
+        <img src={user.profilePicture ?"http://localhost:8080/images" + user.profilePicture :  profile} alt="cover" />
       </div>
       <div className="profileName">
-        <span>Zendsys MJ</span>
-        <span>Senior UI/UX designer</span>
+        <span>{user.firstName +" "+ user.lastName}</span>
+        <span>{user.about}</span>
       </div>
       <div className="folloStatus">
         <hr />
         <div>
             <div className="follow">
-                <span>6890</span>
+                <span>{user.following.length}</span>
                 <span>Followings</span>
             </div>
             <div className="vl"></div>
             <div className="follow">
-                <span>1</span>
+                <span>{user.followers.length}</span>
                 <span>Follwers</span>
             </div>
              {

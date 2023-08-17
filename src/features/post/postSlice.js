@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createPost, getTimeLineData, uploadImage } from "./postApi";
+import { createPost, getPostById, getTimeLineData, likePost, uploadImage } from "./postApi";
 
 const initialState = {
     posts:[],
-    loading:false
+    loading:false,
+    likes:null,
+    postByID:[],
 };
 
 export const createPostAsync = createAsyncThunk(
@@ -28,6 +30,24 @@ export const uploadImgAsync = createAsyncThunk(
     "post/getTimeLinePost",
     async (userId) => {
       const response = await getTimeLineData(userId);
+      // The value we return becomes the `fulfilled` action payload
+      return response.data;
+    }
+  );
+
+  export const likePostAsync = createAsyncThunk(
+    "post/likePost",
+    async (likePostData) => {
+      const response = await likePost(likePostData);
+      // The value we return becomes the `fulfilled` action payload
+      return response.data;
+    }
+  );
+
+  export const getPostByIdAsync = createAsyncThunk(
+    "post/getPostById",
+    async (userId) => {
+      const response = await getPostById(userId);
       // The value we return becomes the `fulfilled` action payload
       return response.data;
     }
@@ -68,10 +88,27 @@ export const postSlice = createSlice({
        
         console.log(state.posts)
       })
+      .addCase(likePostAsync.pending, (state) => {
+        state.status = "loading";
+        state.loading=true
+      })
+      .addCase(likePostAsync.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.likes = action.payload
+        state.loading=false
+      })
+      .addCase(getPostByIdAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getPostByIdAsync.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.postByID = action.payload
+      })
   },
 });
 
 export const selectPostLoading = (state)=>state.post.loading
 export const selectTimeLinePost = (state)=>state.post.posts
+export const selectPostByID = (state)=>state.post.postByID
 
 export default postSlice.reducer;

@@ -11,7 +11,7 @@ function Profile() {
         <ProfileLeft/>
         <div className="profile-center">
             <ProfileCard  profilePage={profilePage}/>
-            <Post/>
+            <Post profilePage={profilePage}/>
         </div>
         <RightSide/>
     </div>

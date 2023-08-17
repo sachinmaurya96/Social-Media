@@ -3,10 +3,11 @@ import "./PostFeed.css"
 // import { PostsData } from '../../../../Data/PostData'
 import Feed from '../feed/Feed'
 import { useSelector } from 'react-redux'
-import { getTimeLinePostAsync, selectPostLoading, selectTimeLinePost } from '../../postSlice'
+import { getTimeLinePostAsync, selectPostByID, selectPostLoading, selectTimeLinePost } from '../../postSlice'
 import { useDispatch } from 'react-redux'
 function PostFeed() {
   const PostData = useSelector(selectTimeLinePost)
+  const profilePost = useSelector(selectPostByID)
   const loading = useSelector(selectPostLoading)
   const dispatch = useDispatch()
   useEffect(()=>{

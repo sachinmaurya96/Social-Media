@@ -31,3 +31,25 @@ export function createPost(postData) {
         resolve({ data });
       });
     }
+
+    export function likePost(likePostData) {
+    
+      const userId = {userId:likePostData.userId}
+      return new Promise(async (resolve) => {
+        const response = await fetch(url+`/post/${likePostData.dataId}/like`, {
+          method:'PUT',
+          body: JSON.stringify(userId),
+          headers: { 'content-type': 'application/json' },
+        });
+        const data = await response.json();
+        resolve({ data });
+      });
+    }
+
+    export function getPostById(userId) {
+      return new Promise(async (resolve) => {
+        const response = await fetch(url+`/post/`+userId);
+        const data = await response.json();
+        resolve({ data });
+      });
+    }
